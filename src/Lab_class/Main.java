@@ -17,6 +17,7 @@ public class Main {
                 case 1: Team.fillCommands();   break;
                 case 2: Team.printCommands();  break;
                 case 3: Team.winnersByType();  break;
+                case 4: Team.overallWinner();  break;
                 default: break cycle;
             }
         }
