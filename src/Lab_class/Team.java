@@ -9,7 +9,7 @@ public class Team {
         private int Score;                  //количество очков
         private static Team[] commands;     //массив объектов
 
-    //началькое заполнение массива
+    //начальное заполнение массива
         static {
             commands = new Team[]{
                     new Team("Team", "Sport", 1)
@@ -87,8 +87,18 @@ public class Team {
         }
 
         public static void fillCommands() {
-            System.out.println("Введите количество команд: ");
-            int n = new Scanner(System.in).nextInt();
+            int n = 0;
+            while (n <= 0) {
+                System.out.println("Введите количество команд: ");
+                Scanner scan = new Scanner(System.in);
+                if (scan.hasNextInt()) {
+                    n = scan.nextInt();
+                    if (n <= 0)
+                        System.out.println("Недопустимое значение!");
+                } else {
+                    System.out.println("Нужно ввести целое число!");
+                }
+            }
             commands = new Team[n];
             System.out.println("Введите информацию о командах: ");
             for (int i=0; i < commands.length; i++){
@@ -128,6 +138,7 @@ public class Team {
                 System.out.println("\t" + types[i] + " => " + commands[pos_max]);
             }
         }
+
     //б) команда, занявшая первое место по общему зачёту
         public static void overallWinner() {
             // names[k] - название команды, totals[k] - сумма её очков по всем видам
@@ -158,6 +169,20 @@ public class Team {
             System.out.println("\t" + names[pos_max] + " - " + totals[pos_max] + " очков");
         }
 
+    //в) упорядочить команды
+        public static void sortByPlace() {
+            for (int i = 0; i < commands.length - 1; i++)
+                for (int j = 0; j < commands.length - i - 1; j++)
+                    if (commands[j].getScore() < commands[j + 1].getScore()) {
+                        Team rab = commands[j];
+                        commands[j] = commands[j + 1];
+                        commands[j + 1] = rab;
+                    }
+            System.out.println("\nСписок команд по занятому месту:");
+            for (int i = 0; i < commands.length; i++) {
+                System.out.println((i + 1) + " место: " + commands[i]);
+            }
+        }
 
 
 }
