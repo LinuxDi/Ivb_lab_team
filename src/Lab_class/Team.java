@@ -24,15 +24,28 @@ public class Team {
         }
 
     //конструктор по умолчанию
+    //Было принято решение сделать через циклы, чтобы в массив класса не попадали объекты с нулевыми значениями
         public Team() {
             Scanner scan = new Scanner(System.in);
-            System.out.println("Название команды: ");
-            this.setTeamName(scan.nextLine());
-            System.out.println("\t Вид спорта:");
-            this.setSorevName(scan.nextLine());
-            System.out.println("\t Количество очков");
-            this.setScore(scan.nextInt());
-            scan.nextLine();
+            while (this.TeamName == null) {
+                System.out.println("Название команды: ");
+                this.setTeamName(scan.nextLine());
+            }
+            while (this.SorevName == null) {
+                System.out.println("\t Вид спорта:");
+                this.setSorevName(scan.nextLine());
+            }
+            this.Score = -1;
+            while (this.Score < 0) {
+                System.out.println("\t Количество очков: ");
+                if (scan.hasNextInt()) {
+                    this.setScore(scan.nextInt());
+                } else {
+                    System.out.println("Нужно ввести целое число!");
+                    scan.next();
+                }
+                scan.nextLine();
+            }
         }
 
     //геттеры и сеттеры
