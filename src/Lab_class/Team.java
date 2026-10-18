@@ -3,38 +3,51 @@ package Lab_class;
 import java.util.Scanner;
 
 public class Team {
-    //поля класса
-        private String TeamName;            //название команды
-        private String SorevName;           //вид соревнования
-        private int Score;                  //количество очков
-        private static Team[] commands;     //массив объектов
 
-    //начальное заполнение массива
+    // ===== поля класса =====
+        private String          TeamName;       //название команды
+        private String          SorevName;      //вид соревнования
+        private int             Score;          //количество очков
+        private static Team[]   commands;       //массив объектов
+
+    // ===== начальное заполнение массива =====
+    // выполняется один раз при первом обращении к классу
         static {
             commands = new Team[]{
                     new Team("Team", "Sport", 1)
             };
         }
 
+
+    // ===== конструкторы =====
+
     //конструктор
-        public Team(String teamName, String sorevName, int score){
-            this.TeamName = teamName;
-            this.SorevName = sorevName;
-            this.Score = score;
+        public Team(String  teamName,
+                    String  sorevName,
+                    int     score){
+            this.TeamName =     teamName;
+            this.SorevName =    sorevName;
+            this.Score =        score;
         }
 
-    //конструктор по умолчанию
+    //конструктор по умолчанию (то есть ввод происходит через клавиатуру)
     //Было принято решение сделать через циклы, чтобы в массив класса не попадали объекты с нулевыми значениями
         public Team() {
+
+            // пока название не задано (null), спрашиваем название команды снова
             Scanner scan = new Scanner(System.in);
             while (this.TeamName == null) {
                 System.out.println("Название команды: ");
                 this.setTeamName(scan.nextLine());
             }
+
+            // то же самое для вида соревнования
             while (this.SorevName == null) {
                 System.out.println("\t Вид спорта:");
                 this.setSorevName(scan.nextLine());
             }
+
+            // -1 означает "очки ещё не заданы"
             this.Score = -1;
             while (this.Score < 0) {
                 System.out.println("\t Количество очков: ");
@@ -48,7 +61,8 @@ public class Team {
             }
         }
 
-    //геттеры и сеттеры
+
+    //===== геттеры и сеттеры =====
         public String getTName(){return this.TeamName;}
         public void setTeamName(String tname){
             if (tname.isEmpty())
@@ -73,11 +87,14 @@ public class Team {
                 this.Score = score;
         }
 
-
+    // ===== метод toString (как объект выводится на экран) =====
         @Override
         public String toString() {
             return String.format("Команда: %s \t вид: %s \t очков: %d", TeamName, SorevName, Score);
         }
+
+
+    // =====  методы для работы с массивом =====
 
     //вывод массива
         public static void printCommands() {
@@ -86,6 +103,7 @@ public class Team {
                 }
         }
 
+    //заполнение массива с клавиатуры
         public static void fillCommands() {
             int n = 0;
             while (n <= 0) {
@@ -106,6 +124,9 @@ public class Team {
                 commands[i] = new Team();
             }
         }
+
+
+    // ===== выполнение условий задачи =====
 
     //а) победители в каждом виде соревнований
         public static void winnersByType() {
