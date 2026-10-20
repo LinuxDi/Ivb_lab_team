@@ -83,7 +83,7 @@ public class TeamService {
         }
 
     //б) команда, занявшая первое место по общему зачёту
-        public static void overallWinnerVersion2() {
+        public static void overallWinner() {
             // names[k] - название команды, totals[k] - сумма её очков по всем видам
             String[] names = new String[commands.length];
             int[] totals = new int[commands.length];
