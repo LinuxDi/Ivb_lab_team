@@ -47,4 +47,38 @@ public class TeamService {
                 commands[i] = new Team();
             }
         }
+
+    // ===== выполнение условий задачи =====
+
+    //а) победители в каждом виде соревнований
+        public static void winnersByType() {
+            String[] types = new String[commands.length];
+            int typeCount = 0;
+            for (int i = 0; i < commands.length; i++) {
+                boolean exists = false;
+                for (int j = 0; j < typeCount; j++) {
+                    if (types[j].equalsIgnoreCase(commands[i].getSName())) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    types[typeCount] = commands[i].getSName();
+                    typeCount++;
+                }
+            }
+
+            System.out.println("\nПобедители по видам соревнований:");
+            for (int i = 0; i < typeCount; i++) {
+                int pos_max = -1;   // номер команды-победителя (-1, т.к. пока никого нет)
+                for (int j = 0; j < commands.length; j++) {
+                    if (commands[j].getSName().equalsIgnoreCase(types[i])) {
+                        if (pos_max == -1 || commands[j].getScore() > commands[pos_max].getScore()) {
+                            pos_max = j;
+                        }
+                    }
+                }
+                System.out.println("\t" + types[i] + " => " + commands[pos_max]);
+            }
+        }
 }
