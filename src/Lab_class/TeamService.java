@@ -111,4 +111,19 @@ public class TeamService {
             System.out.println("\nПобедитель общего зачёта:");
             System.out.println("\t" + names[pos_max] + " - " + totals[pos_max] + " очков");
         }
+
+    //в) упорядочить команды
+        public static void sortByPlace() {
+            for (int i = 0; i < commands.length - 1; i++)
+                for (int j = 0; j < commands.length - i - 1; j++)
+                    if (commands[j].getScore() < commands[j + 1].getScore()) {
+                        Team rab = commands[j];
+                        commands[j] = commands[j + 1];
+                        commands[j + 1] = rab;
+                    }
+            System.out.println("\nСписок команд по занятому месту:");
+            for (int i = 0; i < commands.length; i++) {
+                System.out.println((i + 1) + " место: " + commands[i]);
+            }
+        }
 }
