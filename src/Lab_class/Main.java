@@ -33,11 +33,11 @@ public class Main {
             }
 
             switch (c) {
-                case 1: Team.fillCommands();        break;
-                case 2: Team.printCommands();       break;
-                case 3: Team.winnersByType();       break;
-                case 4: Team.overallWinner();       break;
-                case 5: Team.sortByPlace();         break;
+                case 1: TeamService.fillCommands();        break;
+                case 2: TeamService.printCommands();       break;
+                case 3: TeamService.winnersByType();       break;
+                case 4: TeamService.overallWinner();       break;
+                case 5: TeamService.sortByPlace();         break;
                 case 6: break cycle;
                 default: System.out.println("Такого пункта нет!");
             }
