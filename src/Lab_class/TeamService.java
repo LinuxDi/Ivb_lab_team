@@ -81,4 +81,34 @@ public class TeamService {
                 System.out.println("\t" + types[i] + " => " + commands[pos_max]);
             }
         }
+
+    //б) команда, занявшая первое место по общему зачёту
+        public static void overallWinnerVersion2() {
+            // names[k] - название команды, totals[k] - сумма её очков по всем видам
+            String[] names = new String[commands.length];
+            int[] totals = new int[commands.length];
+            int count = 0;
+            for (int i = 0; i < commands.length; i++) {
+                boolean found = false;
+                for (int j = 0; j < count; j++) {
+                    if (names[j].equalsIgnoreCase(commands[i].getTName())) {
+                        totals[j] += commands[i].getScore();
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    names[count] = commands[i].getTName();
+                    totals[count] = commands[i].getScore();
+                    count++;
+                }
+            }
+
+            int pos_max = 0;
+            for (int i = 1; i < count; i++) {
+                if (totals[i] > totals[pos_max]) pos_max = i;
+            }
+            System.out.println("\nПобедитель общего зачёта:");
+            System.out.println("\t" + names[pos_max] + " - " + totals[pos_max] + " очков");
+        }
 }
